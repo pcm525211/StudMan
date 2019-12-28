@@ -2,6 +2,7 @@ package com.example.studman;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class login extends AppCompatActivity {
         txtPassword = (EditText) findViewById(R.id.txtPassword);
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
+
         loginLoading = (ProgressBar) findViewById(R.id.loginLoading);
         loginLoading.setVisibility(View.GONE);
 
@@ -66,8 +68,15 @@ public class login extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try{
                                 loginLoading.setVisibility(View.GONE);
-                            String token = response.getString("token");
-                            Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+                                if(response.getString("status") == "success"){
+                                    String token = response.getString("token");
+                                    Intent  i = new Intent(getApplicationContext(),MainActivity.class);
+                                    startActivity(i);
+                                }else{
+                                    Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
+                                }
+
+
                         }catch (JSONException je){}
 
                         }
