@@ -16,7 +16,7 @@
 
     <EditText
         android:id="@+id/txtEmail"
-        style="@android:style/Widget.Material.Light.EditText"
+        style="@android:style/Widget.Material.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="32dp"
-        android:background="#388E3C"
+        android:background="#C2185B"
         android:text="Sign In"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
