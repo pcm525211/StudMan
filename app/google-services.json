@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "391024333417",
+    "firebase_url": "https://studman-b3a2e.firebaseio.com",
+    "project_id": "studman-b3a2e",
+    "storage_bucket": "studman-b3a2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391024333417:android:cf20749beea9d4e78708f8",
+        "android_client_info": {
+          "package_name": "com.example.studman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391024333417-l6542mneu9mqi6paljv6j5244n25c94h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.studman",
+            "certificate_hash": "fd6502ef02c6b04c135adf76fae59648bc9a5219"
+          }
+        },
+        {
+          "client_id": "391024333417-vq3sl22075ok2ktr5cl0190odms4q5ql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWvpFtz7-XJc0JQvoVgjqz6dTpMl7R0kU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391024333417-vq3sl22075ok2ktr5cl0190odms4q5ql.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
