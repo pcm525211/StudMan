@@ -12,7 +12,7 @@ public class WebService {
     private static String NAMESPACE = "http://tempuri.org/";
     //Webservice URL - It is asmx file location hosted in the server in case of .Net
     //Change the IP address to your machine IP address
-    private static String URL = "http://adamlye.freeasphost.net/_____2_/adamlye/WebService.asmx";
+    private static String URL = "http://192.168.43.43/practiceWeb/WebService.asmx";
     //SOAP Action URI again http://tempuri.org
     private static String SOAP_ACTION = "http://tempuri.org/";
 

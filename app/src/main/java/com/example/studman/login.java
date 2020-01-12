@@ -68,12 +68,13 @@ public class login extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try{
                                 loginLoading.setVisibility(View.GONE);
-                                if(response.getString("status") == "Success"){
+                                if(response.getString("status").equals("Success") ){
 //                                    String token = response.getString("token");
-                                    Intent  i = new Intent(getApplicationContext(),MainActivity.class);
+                                    Intent  i = new Intent(getApplicationContext(),StdHome.class);
                                     startActivity(i);
                                 }else{
-                                    Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(login.this, "Email or password is wrong", Toast.LENGTH_SHORT).show();
                                 }
 
 
