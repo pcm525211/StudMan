@@ -1,7 +1,5 @@
 package com.example.studman;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -29,7 +29,7 @@ public class login extends AppCompatActivity {
     EditText txtEmail,txtPassword;
     Button btnLogin;
     ProgressBar loginLoading;
-    String loginurl = "https://studmanapi.herokuapp.com/student/login";
+    String loginurl = "http://adamlye.freeasphost.net/_____2_/adamlye/student/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +68,14 @@ public class login extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try{
                                 loginLoading.setVisibility(View.GONE);
-                                if(response.getString("status").equals("success")){
-                                    String token = response.getString("token");
-                                    Intent  i = new Intent(getApplicationContext(),MainActivity.class);
+                                if(response.getString("status").equals("Success") ){
+//                                    String token = response.getString("token");
+                                    Intent  i = new Intent(getApplicationContext(),StdHome.class);
                                     startActivity(i);
 
                                 }else{
-                                    Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(login.this, "Email or password is wrong", Toast.LENGTH_SHORT).show();
                                 }
 
 
@@ -85,7 +86,7 @@ public class login extends AppCompatActivity {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "here "+error.toString(), Toast.LENGTH_LONG).show();
                 }
             }) {
 
