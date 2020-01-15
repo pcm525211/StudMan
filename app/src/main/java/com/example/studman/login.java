@@ -72,6 +72,7 @@ public class login extends AppCompatActivity {
 //                                    String token = response.getString("token");
                                     Intent  i = new Intent(getApplicationContext(),StdHome.class);
                                     startActivity(i);
+
                                 }else{
 //                                    Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
                                     Toast.makeText(login.this, "Email or password is wrong", Toast.LENGTH_SHORT).show();
