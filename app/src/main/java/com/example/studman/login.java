@@ -68,10 +68,11 @@ public class login extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try{
                                 loginLoading.setVisibility(View.GONE);
-                                if(response.getString("status") == "success"){
+                                if(response.getString("status").equals("success")){
                                     String token = response.getString("token");
                                     Intent  i = new Intent(getApplicationContext(),MainActivity.class);
                                     startActivity(i);
+
                                 }else{
                                     Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
                                 }
