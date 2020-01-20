@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:background="@color/white"
+        android:background="@color/trans"
         android:id="@+id/btn_search"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -28,12 +28,13 @@
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/search" />
+        app:srcCompat="@drawable/search"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/instituteRview"
         android:layout_width="416dp"
-        android:layout_height="550dp"
+        android:layout_height="650sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -6,4 +6,5 @@
     <color name="overlay">#8E000000</color>
     <color name="white">#FFFFFF</color>
     <color name="orange">#EBEBEB</color>
+    <color name="trans">#00FFFFFF</color>
 </resources>
