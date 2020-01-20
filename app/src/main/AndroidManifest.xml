@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".StdHome"/>
-        <activity android:name=".SignUp"/>
-        <activity android:name=".apiTest"/>
+        <activity android:name=".Institutes"></activity>
+        <activity android:name=".StdHome" />
+        <activity android:name=".apiTest"></activity>
         <activity
             android:name=".sampleScrolling"
             android:label="@string/title_activity_sample_scrolling"

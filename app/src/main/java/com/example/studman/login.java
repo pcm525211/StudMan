@@ -28,6 +28,7 @@ public class login extends AppCompatActivity {
 
     EditText txtEmail,txtPassword;
     Button btnLogin;
+    Button btnSignUp;
     ProgressBar loginLoading;
     String loginurl = "http://adamlye.freeasphost.net/_____2_/adamlye/student/login";
 
@@ -40,9 +41,18 @@ public class login extends AppCompatActivity {
         txtPassword = (EditText) findViewById(R.id.txtPassword);
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnSignUp = (Button) findViewById(R.id.btnSignUp);
 
         loginLoading = (ProgressBar) findViewById(R.id.loginLoading);
         loginLoading.setVisibility(View.GONE);
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(login.this, "Signup", Toast.LENGTH_SHORT).show();
+                //Intent i = new Intent(this,)
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
