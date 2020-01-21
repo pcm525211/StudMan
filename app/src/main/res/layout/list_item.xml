@@ -12,16 +12,16 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding = "10dp"
-        android:layout_margin="10dp"
-        android:radius="200dp"
-        app:cardCornerRadius="20sp"
-        app:cardElevation="5sp"
+        android:padding = "10dip"
+        android:layout_margin="10dip"
+        android:radius="200dip"
+        app:cardCornerRadius="20dip"
+        app:cardElevation="5dip"
         >
         <ImageView
             android:id="@+id/imgIcon"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="200dip"
             android:scaleType="centerCrop"
 
 
@@ -30,8 +30,8 @@
 
         <TextView
             android:id="@+id/textTitle"
-            android:layout_width="211dp"
-            android:layout_height="54dp"
+            android:layout_width="211dip"
+            android:layout_height="54dip"
             android:layout_gravity="center"
             android:gravity="center"
 

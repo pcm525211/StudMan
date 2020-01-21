@@ -1,6 +1,8 @@
 package com.example.studman;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ public class Institutes extends AppCompatActivity {
 
     public static final String URL = "http://adamlye.freeasphost.net/_____2_/adamlye/institute/";
     RecyclerView rv;
+    ProgressBar insLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class Institutes extends AppCompatActivity {
         setContentView(R.layout.activity_institutes);
 
         final RecyclerView recyclerView = findViewById(R.id.instituteRview);
+        insLoading = (ProgressBar) findViewById(R.id.insLoading);
+        insLoading.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -37,6 +42,7 @@ public class Institutes extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
 //                Toast.makeText(Intitute.this, response.toString(), Toast.LENGTH_SHORT).show();
+                insLoading.setVisibility(View.GONE);
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
                 Institute[] institutes=  gson.fromJson(response.toString(),Institute[].class);
