@@ -10,13 +10,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Institutes"
-            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".courses"></activity>
+        <activity
+            android:name=".Institutes"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".StdHome" />
-        <activity android:name=".apiTest"></activity>
+        <activity android:name=".apiTest" />
         <activity
             android:name=".sampleScrolling"
             android:label="@string/title_activity_sample_scrolling"

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,15 +38,15 @@ public class instituteAdapter extends RecyclerView.Adapter<instituteAdapter.inst
         holder.txt.setText(institute.getInsName());
         Glide.with(holder.img.getContext()).load("http://adamlye.freeasphost.net/_____2_/adamlye/Content/institute_images/"+institute.getInsImage()).into(holder.img);
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent it = new Intent(context,UserDetail.class);
-//                it.putExtra("uname",institute.getInsName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent it = new Intent(context,Institute.class);
+//                it.putExtra("uname-",institute.getInsName());
 //                context.startActivity(it);
-//                Toast.makeText(context, institute.getInsName() + " clicked", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+                Toast.makeText(context, institute.getInsName() + " clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
