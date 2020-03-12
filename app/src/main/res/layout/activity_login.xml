@@ -65,7 +65,7 @@
         android:layout_marginEnd="40dip"
         android:backgroundTint="#60C0185A"
         android:ems="10"
-        android:hint="Enter Password"
+        android:hint="Enter Email"
         android:inputType="textPassword"
         android:textColor="?attr/colorBackgroundFloating"
         android:textColorHint="?attr/colorButtonNormal"
