@@ -47,7 +47,9 @@ public class Institutes extends AppCompatActivity {
                 Gson gson = gsonBuilder.create();
                 Institute[] institutes=  gson.fromJson(response.toString(),Institute[].class);
 //                Toast.makeText(Intitute.this, institutes[0].getInsName(), Toast.LENGTH_SHORT).show();
-                recyclerView.setAdapter(new instituteAdapter(institutes,Institutes.this));
+                instituteAdapter IA = new instituteAdapter(institutes,Institutes.this);
+                recyclerView.setAdapter(IA);
+                IA.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override
