@@ -30,7 +30,7 @@ public class login extends AppCompatActivity {
     Button btnLogin;
     Button btnSignUp;
     ProgressBar loginLoading;
-    String loginurl = "http://adamlye.freeasphost.net/_____2_/adamlye/student/login";
+    String loginurl = "https://www.leancerweb.com/studman/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class login extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try{
                                 loginLoading.setVisibility(View.GONE);
-                                if(response.getString("status").equals("Success") ){
+                                if(response.getString("status").equals("success") ){
 //                                    String token = response.getString("token");
                                     Intent  i = new Intent(getApplicationContext(),StdHome.class);
                                     startActivity(i);

@@ -22,7 +22,7 @@ import org.json.JSONArray;
 
 public class Institutes extends AppCompatActivity {
 
-    public static final String URL = "http://adamlye.freeasphost.net/_____2_/adamlye/institute/";
+    public static final String URL = "https://www.leancerweb.com/studman/institute/index.php";
     RecyclerView rv;
     ProgressBar insLoading;
 
