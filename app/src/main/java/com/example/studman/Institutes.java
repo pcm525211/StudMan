@@ -1,10 +1,15 @@
 package com.example.studman;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,11 +25,22 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 public class Institutes extends AppCompatActivity {
 
     public static final String URL = "https://www.leancerweb.com/studman/institute/index.php";
     RecyclerView rv;
     ProgressBar insLoading;
+    EditText txtInstitute;
+    Institute[] institutes;
+    Boolean isloading=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +48,38 @@ public class Institutes extends AppCompatActivity {
         setContentView(R.layout.activity_institutes);
 
         final RecyclerView recyclerView = findViewById(R.id.instituteRview);
+        txtInstitute = (EditText) findViewById(R.id.txt_institute_search);
         insLoading = (ProgressBar) findViewById(R.id.insLoading);
         insLoading.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            txtInstitute.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    Institute[] mutedinstitutes;
+
+                    if(!isloading) {
+                        if (s.toString().length() > 0) {
+                            mutedinstitutes = getSearchResult(s.toString());
+                        } else {
+                            mutedinstitutes = institutes;
+                        }
+
+                        instituteAdapter IA = new instituteAdapter(mutedinstitutes, Institutes.this);
+                        recyclerView.setAdapter(IA);
+                        IA.notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
 
 
 
@@ -43,9 +88,10 @@ public class Institutes extends AppCompatActivity {
             public void onResponse(JSONArray response) {
 //                Toast.makeText(Intitute.this, response.toString(), Toast.LENGTH_SHORT).show();
                 insLoading.setVisibility(View.GONE);
+                isloading = false;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
-                Institute[] institutes=  gson.fromJson(response.toString(),Institute[].class);
+                institutes=  gson.fromJson(response.toString(),Institute[].class);
                 instituteAdapter IA = new instituteAdapter(institutes,Institutes.this);
                 recyclerView.setAdapter(IA);
                 IA.notifyDataSetChanged();
@@ -59,5 +105,17 @@ public class Institutes extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
+    }
+
+    private Institute[] getSearchResult(String s){
+        ArrayList<Institute> temp = new ArrayList<Institute>();
+
+        for(Institute institute : institutes){
+            if(institute.getInsName().toLowerCase().startsWith(s.toLowerCase())){
+                temp.add(institute);
+            }
+        }
+
+        return temp.toArray(new Institute[temp.size()]);
     }
 }
