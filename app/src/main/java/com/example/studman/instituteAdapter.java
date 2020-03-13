@@ -36,7 +36,7 @@ public class instituteAdapter extends RecyclerView.Adapter<instituteAdapter.inst
     public void onBindViewHolder(@NonNull instituAdapterViewHolder holder, int position) {
         final Institute institute = institutes[position];
         holder.txt.setText(institute.getInsName());
-        Glide.with(holder.img.getContext()).load("http://adamlye.freeasphost.net/_____2_/adamlye/Content/institute_images/"+institute.getInsImage()).into(holder.img);
+        Glide.with(holder.img.getContext()).load("https://www.leancerweb.com/studman/institute/img/"+institute.getInsImage()).into(holder.img);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

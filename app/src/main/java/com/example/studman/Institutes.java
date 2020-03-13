@@ -38,7 +38,7 @@ public class Institutes extends AppCompatActivity {
 
 
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST,URL , null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,URL , null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 //                Toast.makeText(Intitute.this, response.toString(), Toast.LENGTH_SHORT).show();
@@ -46,7 +46,6 @@ public class Institutes extends AppCompatActivity {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
                 Institute[] institutes=  gson.fromJson(response.toString(),Institute[].class);
-//                Toast.makeText(Intitute.this, institutes[0].getInsName(), Toast.LENGTH_SHORT).show();
                 instituteAdapter IA = new instituteAdapter(institutes,Institutes.this);
                 recyclerView.setAdapter(IA);
                 IA.notifyDataSetChanged();
