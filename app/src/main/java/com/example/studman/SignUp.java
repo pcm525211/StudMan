@@ -34,6 +34,7 @@ public class SignUp extends AppCompatActivity {
     Button btnRegister,btnSignin;
     ProgressBar registerLoading;
     SQLiteDatabase db;
+    Boolean isValidate = true;
     String RegisterUrl = "https://www.leancerweb.com/studman/student/register.php";
 
     @Override
@@ -53,14 +54,19 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void onRegisterButtonClick(View view){
-        registerLoading.setVisibility(View.VISIBLE);
-        Map<String, String> postParam= new HashMap<String, String>();
-        postParam.put("email", txtEmail.getText().toString());
-        postParam.put("password", txtPassword.getText().toString());
-        postParam.put("name", txtName.getText().toString());
-        postParam.put("gender", gender);
-        PostRequest(postParam);
 
+        //InputValidation
+        this.validateInput();
+
+        if(isValidate) {
+            registerLoading.setVisibility(View.VISIBLE);
+            Map<String, String> postParam = new HashMap<String, String>();
+            postParam.put("email", txtEmail.getText().toString());
+            postParam.put("password", txtPassword.getText().toString());
+            postParam.put("name", txtName.getText().toString());
+            postParam.put("gender", gender);
+            PostRequest(postParam);
+        }
 
     }
 
@@ -84,6 +90,29 @@ public class SignUp extends AppCompatActivity {
                     break;
         }
 
+    }
+
+    private void validateInput(){
+        if(txtName.getText().toString().length() == 0){
+            txtName.setError("Name Is Required");
+            isValidate = false;
+        }
+        if(txtEmail.getText().toString().length() == 0){
+            txtEmail.setError("Email is Required");
+            isValidate = false;
+        }
+        if(txtEmail.getText().toString().length() > 0 && !txtEmail.getText().toString().matches("^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")){
+            txtEmail.setError("Please Enter Valid Email");
+            isValidate = false;
+        }
+        if(txtPassword.getText().toString().length() == 0){
+            txtPassword.setError("Password is Required");
+            isValidate = false;
+        }
+        if(gender == null){
+            Toast.makeText(SignUp.this,"Please Select Gender", Toast.LENGTH_SHORT).show();
+            isValidate = false;
+        }
     }
 
     private void PostRequest(Map<String,String> param) {

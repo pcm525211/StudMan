@@ -33,6 +33,7 @@ public class login extends AppCompatActivity {
     Button btnSignUp;
     ProgressBar loginLoading;
     SQLiteDatabase db;
+    Boolean isValidate = true;
     String loginurl = "https://www.leancerweb.com/studman/login.php";
 
     @Override
@@ -63,14 +64,32 @@ public class login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginLoading.setVisibility(View.VISIBLE);
-                Map<String, String> postParam= new HashMap<String, String>();
-                postParam.put("email", txtEmail.getText().toString());
-                postParam.put("password", txtPassword.getText().toString());
-                PostRequest(postParam);
+                validateInput();
 
+                if(isValidate) {
+                    loginLoading.setVisibility(View.VISIBLE);
+                    Map<String, String> postParam = new HashMap<String, String>();
+                    postParam.put("email", txtEmail.getText().toString());
+                    postParam.put("password", txtPassword.getText().toString());
+                    PostRequest(postParam);
+                }
             }
         });
+    }
+
+    private void validateInput(){
+        if(txtEmail.getText().toString().length() == 0){
+            txtEmail.setError("Email is Required");
+            isValidate = false;
+        }
+        if(txtEmail.getText().toString().length() > 0 && !txtEmail.getText().toString().matches("^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")){
+            txtEmail.setError("Please Enter Valid Email");
+            isValidate = false;
+        }
+        if(txtPassword.getText().toString().length() == 0){
+            txtPassword.setError("Password is Required");
+            isValidate = false;
+        }
     }
     private void PostRequest(Map<String,String> param) {
         RequestQueue queue;
