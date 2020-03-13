@@ -2,7 +2,9 @@ package com.example.studman;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +33,7 @@ public class SignUp extends AppCompatActivity {
     String gender;
     Button btnRegister,btnSignin;
     ProgressBar registerLoading;
+    SQLiteDatabase db;
     String RegisterUrl = "https://www.leancerweb.com/studman/student/register.php";
 
     @Override
@@ -41,6 +44,9 @@ public class SignUp extends AppCompatActivity {
         txtEmail = (EditText) findViewById(R.id.txtRegisterEmail);
         txtPassword = (EditText) findViewById(R.id.txtRegisterPassword);
         txtName = (EditText) findViewById(R.id.txtRegisterName);
+
+        db=openOrCreateDatabase("studman", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS student(email VARCHAR,password VARCHAR);");
 
         registerLoading = (ProgressBar) findViewById(R.id.registerLoading);
         registerLoading.setVisibility(View.GONE);
@@ -93,6 +99,10 @@ public class SignUp extends AppCompatActivity {
                         try{
                             registerLoading.setVisibility(View.GONE);
                             if(response.getString("status").equals("success") ){
+
+                                db.execSQL("INSERT INTO student VALUES('"+txtEmail.getText().toString()+"','"+txtPassword.getText().toString()+
+                                        "');");
+
                                 Intent i = new Intent(getApplicationContext(),StdHome.class);
                                 startActivity(i);
                             }else{

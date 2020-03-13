@@ -1,6 +1,8 @@
 package com.example.studman;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +32,7 @@ public class login extends AppCompatActivity {
     Button btnLogin;
     Button btnSignUp;
     ProgressBar loginLoading;
+    SQLiteDatabase db;
     String loginurl = "https://www.leancerweb.com/studman/login.php";
 
     @Override
@@ -45,6 +48,9 @@ public class login extends AppCompatActivity {
 
         loginLoading = (ProgressBar) findViewById(R.id.loginLoading);
         loginLoading.setVisibility(View.GONE);
+
+        db=openOrCreateDatabase("studman", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS student(email VARCHAR,password VARCHAR);");
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,13 +85,16 @@ public class login extends AppCompatActivity {
                             try{
                                 loginLoading.setVisibility(View.GONE);
                                 if(response.getString("status").equals("success") ){
-//                                    String token = response.getString("token");
+
+                                    db.execSQL("INSERT INTO student VALUES('"+txtEmail.getText().toString()+"','"+txtPassword.getText().toString()+
+                                            "');");
+
                                     Intent  i = new Intent(getApplicationContext(),StdHome.class);
                                     startActivity(i);
 
                                 }else{
 //                                    Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(login.this, "Email or password is wrong", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(login.this, response.getString("msg"), Toast.LENGTH_SHORT).show();
                                 }
 
 
