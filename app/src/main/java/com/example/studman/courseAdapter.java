@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 public class courseAdapter extends RecyclerView.Adapter<courseAdapter.courseAdapterViewHolder> {
 
@@ -31,7 +34,19 @@ public class courseAdapter extends RecyclerView.Adapter<courseAdapter.courseAdap
 
     @Override
     public void onBindViewHolder(@NonNull courseAdapterViewHolder holder, int position) {
+        final Course course = courses[position];
+        holder.txt.setText(course.getCoursename());
+        Glide.with(holder.img.getContext()).load("https://www.leancerweb.com/studman/course/img/"+course.getThumbnailurl()).into(holder.img);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent it = new Intent(context,Institute.class);
+//                it.putExtra("uname-",institute.getInsName());
+//                context.startActivity(it);
+                Toast.makeText(context, course.getCoursename() + " clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

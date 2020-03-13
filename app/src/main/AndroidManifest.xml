@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".courses" />
+        <activity android:name=".Courses" />
         <activity
             android:name=".Institutes"
             android:windowSoftInputMode="adjustPan" />

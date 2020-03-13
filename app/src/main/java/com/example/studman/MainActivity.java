@@ -12,7 +12,7 @@ import com.android.volley.RequestQueue;
 public class MainActivity extends AppCompatActivity {
 
     //declarations
-    Button btn,btn2,btnInstitutes;
+    Button btn,btn2,btnInstitutes,btnCourses;
     RequestQueue queue;
 
 
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btn = (Button) findViewById(R.id.btnID);
         btn2 = (Button) findViewById(R.id.button);
         btnInstitutes = (Button) findViewById(R.id.btn_institutes);
+        btnCourses = (Button) findViewById(R.id.btn_courses);
 
         //go to institutes
 
@@ -33,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(),Institutes.class);
+                startActivity(i);
+            }
+        });
+
+        //go to courses
+
+        btnCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(),Courses.class);
                 startActivity(i);
             }
         });

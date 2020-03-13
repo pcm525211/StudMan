@@ -18,7 +18,7 @@
         >
 
         <EditText
-            android:id="@+id/txt_institute_search"
+            android:id="@+id/txt_course_search"
             android:layout_width="265dip"
             android:layout_height="64dip"
             android:layout_marginTop="32dip"
@@ -54,7 +54,7 @@
             />
 
         <ProgressBar
-            android:id="@+id/insLoading"
+            android:id="@+id/courseLoading"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
