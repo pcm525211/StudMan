@@ -89,7 +89,7 @@ public class login extends AppCompatActivity {
                                     db.execSQL("INSERT INTO student VALUES('"+txtEmail.getText().toString()+"','"+txtPassword.getText().toString()+
                                             "');");
 
-                                    Intent  i = new Intent(getApplicationContext(),StdHome.class);
+                                    Intent  i = new Intent(getApplicationContext(),MainActivity.class);
                                     startActivity(i);
 
                                 }else{
