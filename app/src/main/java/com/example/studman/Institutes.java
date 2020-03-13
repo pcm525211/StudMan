@@ -8,8 +8,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,13 +23,7 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 public class Institutes extends AppCompatActivity {
 
@@ -111,7 +103,7 @@ public class Institutes extends AppCompatActivity {
         ArrayList<Institute> temp = new ArrayList<Institute>();
 
         for(Institute institute : institutes){
-            if(institute.getInsName().toLowerCase().startsWith(s.toLowerCase())){
+            if(institute.getInstName().toLowerCase().startsWith(s.toLowerCase())){
                 temp.add(institute);
             }
         }

@@ -35,8 +35,8 @@ public class instituteAdapter extends RecyclerView.Adapter<instituteAdapter.inst
     @Override
     public void onBindViewHolder(@NonNull instituAdapterViewHolder holder, int position) {
         final Institute institute = institutes[position];
-        holder.txt.setText(institute.getInsName());
-        Glide.with(holder.img.getContext()).load("https://www.leancerweb.com/studman/institute/img/"+institute.getInsImage()).into(holder.img);
+        holder.txt.setText(institute.getInstName());
+        Glide.with(holder.img.getContext()).load("https://www.leancerweb.com/studman/institute/img/"+institute.getPhoto()).into(holder.img);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +44,7 @@ public class instituteAdapter extends RecyclerView.Adapter<instituteAdapter.inst
 //                Intent it = new Intent(context,Institute.class);
 //                it.putExtra("uname-",institute.getInsName());
 //                context.startActivity(it);
-                Toast.makeText(context, institute.getInsName() + " clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, institute.getInstName() + " clicked", Toast.LENGTH_SHORT).show();
             }
         });
     }
