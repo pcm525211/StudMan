@@ -3,6 +3,8 @@ package com.example.studman;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,35 +15,47 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class InstituteDetail extends AppCompatActivity {
 
     Institute institute;
     TextView InsAbout;
-//    public static final String URL = "https://www.leancerweb.com/studman/institute/index.php?ins_id=6";
+    ImageView InsImage;
+    ProgressBar LoadLoading;
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_institute_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+//   Declaration
         final Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String UserId = bundle.getString("UserId");
-        Toast.makeText(this, ""+UserId, Toast.LENGTH_SHORT).show();
-
         final String URL = "https://www.leancerweb.com/studman/institute/index.php?ins_id="+UserId;
+        toolbar= (Toolbar) findViewById(R.id.Toolbar);
+        InsImage = (ImageView)findViewById(R.id.InsImage);
         InsAbout = (TextView)findViewById(R.id.txt_about);
+        LoadLoading = (ProgressBar)findViewById(R.id.LoadLoading);
+
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        setSupportActionBar(toolbar);
+
+        toolbar.setTitle("Title Here");
+        LoadLoading.setVisibility(ProgressBar.VISIBLE);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,16 +64,19 @@ public class InstituteDetail extends AppCompatActivity {
             }
         });
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,URL , null, new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
-//                Toast.makeText(Institutes.this, response.toString(), Toast.LENGTH_LONG).show();
-//                insLoading.setVisibility(View.GONE);
-//                isloading = false;
+            public void onResponse(JSONObject response) {
+                LoadLoading.setVisibility(View.GONE);
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.create();
                 institute=  gson.fromJson(response.toString(),Institute.class);
+
                 InsAbout.setText(institute.getAbout());
+
+                getSupportActionBar().setTitle(institute.getInstName());
+//                Toast.makeText(InstituteDetail.this, ""+institute.getInstName(), Toast.LENGTH_SHORT).show();
+                Glide.with(InsImage.getContext()).load("https://www.leancerweb.com/studman/institute/img/"+institute.getPhoto()).into(InsImage);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -69,6 +86,6 @@ public class InstituteDetail extends AppCompatActivity {
         });
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(jsonObjectRequest);
     }
 }

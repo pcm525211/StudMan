@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Random;
+
 public class courseAdapter extends RecyclerView.Adapter<courseAdapter.courseAdapterViewHolder> {
 
     private Course[] courses;
@@ -37,7 +39,9 @@ public class courseAdapter extends RecyclerView.Adapter<courseAdapter.courseAdap
         final Course course = courses[position];
         holder.txt.setText(course.getCoursename());
         Glide.with(holder.img.getContext()).load("https://www.leancerweb.com/studman/course/img/"+course.getThumbnailurl()).into(holder.img);
-
+        Random r = new Random();
+        int i1 = r.nextInt(500 - 400) + 400;
+        holder.img.getLayoutParams().height = i1;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

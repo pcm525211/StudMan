@@ -9,8 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,7 +42,7 @@ public class Courses extends AppCompatActivity {
         txtCourse = (EditText) findViewById(R.id.txt_course_search);
         insLoading = (ProgressBar) findViewById(R.id.courseLoading);
         insLoading.setVisibility(View.VISIBLE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
 
         txtCourse.addTextChangedListener(new TextWatcher() {
             @Override

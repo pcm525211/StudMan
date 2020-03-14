@@ -6,13 +6,17 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".InstituteDetail"
-    tools:showIn="@layout/activity_institute_detail">
+    tools:showIn="@layout/activity_institute_detail"
+    android:paddingTop="30dip"
+    >
 
     <TextView
+        android:textSize="20dip"
         android:id="@+id/txt_about"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:text="@string/large_text" />
+
 
 </androidx.core.widget.NestedScrollView>

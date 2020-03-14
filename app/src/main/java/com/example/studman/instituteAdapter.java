@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Random;
+
 public class instituteAdapter extends RecyclerView.Adapter<instituteAdapter.instituAdapterViewHolder> {
 
     private Institute[] institutes;
@@ -36,6 +38,7 @@ public class instituteAdapter extends RecyclerView.Adapter<instituteAdapter.inst
     public void onBindViewHolder(@NonNull instituAdapterViewHolder holder, int position) {
         final Institute institute = institutes[position];
         holder.txt.setText(institute.getInstName());
+
         Glide.with(holder.img.getContext()).load("https://www.leancerweb.com/studman/institute/img/"+institute.getPhoto()).into(holder.img);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
