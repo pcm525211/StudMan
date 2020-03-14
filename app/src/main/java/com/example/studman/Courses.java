@@ -78,7 +78,7 @@ public class Courses extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,URL , null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Toast.makeText(Courses.this, response.toString(), Toast.LENGTH_LONG).show();
+
                 insLoading.setVisibility(View.GONE);
                 isloading = false;
                 GsonBuilder gsonBuilder = new GsonBuilder();
