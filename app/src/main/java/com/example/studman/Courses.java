@@ -102,7 +102,7 @@ public class Courses extends AppCompatActivity {
         ArrayList<Course> temp = new ArrayList<Course>();
 
         for(Course course : courses){
-            if(course.getCoursename().toLowerCase().startsWith(s.toLowerCase())){
+            if(course.getCoursename().toLowerCase().contains(s.toLowerCase())){
                 temp.add(course);
             }
         }

@@ -1,12 +1,12 @@
 package com.example.studman;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,10 +41,10 @@ public class instituteAdapter extends RecyclerView.Adapter<instituteAdapter.inst
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent it = new Intent(context,Institute.class);
-//                it.putExtra("uname-",institute.getInsName());
-//                context.startActivity(it);
-                Toast.makeText(context, institute.getInstName() + " clicked", Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(context,InstituteDetail.class);
+                it.putExtra("UserId",institute.getUserId());
+                context.startActivity(it);
+//                Toast.makeText(context, institute.getUserId() + " clicked", Toast.LENGTH_LONG).show();
             }
         });
     }

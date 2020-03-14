@@ -78,7 +78,7 @@ public class Institutes extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,URL , null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Toast.makeText(Institutes.this, response.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(Institutes.this, response.toString(), Toast.LENGTH_LONG).show();
                 insLoading.setVisibility(View.GONE);
                 isloading = false;
                 GsonBuilder gsonBuilder = new GsonBuilder();
@@ -103,7 +103,7 @@ public class Institutes extends AppCompatActivity {
         ArrayList<Institute> temp = new ArrayList<Institute>();
 
         for(Institute institute : institutes){
-            if(institute.getInstName().toLowerCase().startsWith(s.toLowerCase())){
+            if(institute.getInstName().toLowerCase().contains(s.toLowerCase())){
                 temp.add(institute);
             }
         }
