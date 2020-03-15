@@ -1,7 +1,5 @@
 package com.example.studman;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -132,7 +132,7 @@ public class SignUp extends AppCompatActivity {
                                 db.execSQL("INSERT INTO student VALUES('"+txtEmail.getText().toString()+"','"+txtPassword.getText().toString()+
                                         "');");
 
-                                Intent i = new Intent(getApplicationContext(),StdHome.class);
+                                Intent i = new Intent(getApplicationContext(),MainActivity.class);
                                 startActivity(i);
                             }else{
                                 Toast.makeText(SignUp.this,response.getString("msg"), Toast.LENGTH_SHORT).show();

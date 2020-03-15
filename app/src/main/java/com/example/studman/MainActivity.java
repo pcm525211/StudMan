@@ -60,16 +60,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent i = new Intent(getApplicationContext(),sampleScrolling.class);
-                startActivity(i);
-
-            }
-
-
-            });
         }
     }

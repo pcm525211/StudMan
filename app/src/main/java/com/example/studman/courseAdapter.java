@@ -40,7 +40,7 @@ public class courseAdapter extends RecyclerView.Adapter<courseAdapter.courseAdap
         holder.txt.setText(course.getCoursename());
         Glide.with(holder.img.getContext()).load("https://www.leancerweb.com/studman/course/img/"+course.getThumbnailurl()).into(holder.img);
         Random r = new Random();
-        int i1 = r.nextInt(500 - 400) + 400;
+        int i1 = r.nextInt(700 - 300) + 300;
         holder.img.getLayoutParams().height = i1;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

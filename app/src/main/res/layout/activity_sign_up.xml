@@ -19,11 +19,12 @@
         android:id="@+id/textView"
         android:layout_width="134dp"
         android:layout_height="57dp"
-        android:layout_marginTop="40dp"
-        android:text=""
+        android:layout_marginTop="120dp"
+        android:text="Sign Up"
         android:textColor="?attr/colorBackgroundFloating"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Sign Up" />
@@ -102,8 +103,9 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="16dp"
             android:text="Male"
+
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
+            android:textSize="18dip"
             android:onClick="onGenderRadioClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword" />
@@ -116,7 +118,7 @@
             android:layout_marginTop="16dp"
             android:text="Female"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
+            android:textSize="18dip"
             android:onClick="onGenderRadioClick"
             app:layout_constraintStart_toEndOf="@+id/radioMale"
             app:layout_constraintTop_toBottomOf="@+id/txtRegisterPassword" />

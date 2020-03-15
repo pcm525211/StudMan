@@ -27,13 +27,7 @@
         <activity
             android:name=".Institutes"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".StdHome" />
         <activity android:name=".SignUp" />
-        <activity android:name=".apiTest" />
-        <activity
-            android:name=".sampleScrolling"
-            android:label="@string/title_activity_sample_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".login" />
         <activity android:name=".MainActivity"></activity>
     </application>
