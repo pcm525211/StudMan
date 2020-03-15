@@ -8,7 +8,7 @@
     tools:context=".InstituteDetail"
     tools:showIn="@layout/activity_institute_detail"
     android:isScrollContainer="true"
-    android:background="@color/overlay"
+    android:background="@color/background"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,11 +47,13 @@
                     android:layout_marginRight="15dip"
                     android:elevation="3dip"
                     />
+
                 <TextView
                     android:id="@+id/txt_about"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
+                    android:fontFamily="sans-serif-medium"
                     android:text="About"
                     android:textSize="20dip" />
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -86,11 +88,13 @@
                     android:layout_marginRight="15dip"
                     android:elevation="2dip"
                     />
+
                 <TextView
                     android:id="@+id/txt_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
+                    android:fontFamily="sans-serif-medium"
                     android:text="Address"
                     android:textSize="20dip" />
             </androidx.appcompat.widget.LinearLayoutCompat>

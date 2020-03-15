@@ -5,21 +5,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class Course {
 
+    @SerializedName("inst_id")
+    @Expose
+    private String instId;
+    @SerializedName("inst_name")
+    @Expose
+    private String instName;
     @SerializedName("user_id")
     @Expose
     private String userId;
-    @SerializedName("reg_date")
+    @SerializedName("photo")
     @Expose
-    private String regDate;
-    @SerializedName("password")
+    private String photo;
+    @SerializedName("about")
     @Expose
-    private String password;
-    @SerializedName("user_type")
+    private String about;
+    @SerializedName("address")
     @Expose
-    private String userType;
-    @SerializedName("email")
-    @Expose
-    private String email;
+    private String address;
     @SerializedName("course_id")
     @Expose
     private String courseId;
@@ -50,9 +53,22 @@ public class Course {
     @SerializedName("thumbnailurl")
     @Expose
     private String thumbnailurl;
-    @SerializedName("inst_id")
-    @Expose
-    private String instId;
+
+    public String getInstId() {
+        return instId;
+    }
+
+    public void setInstId(String instId) {
+        this.instId = instId;
+    }
+
+    public String getInstName() {
+        return instName;
+    }
+
+    public void setInstName(String instName) {
+        this.instName = instName;
+    }
 
     public String getUserId() {
         return userId;
@@ -62,36 +78,28 @@ public class Course {
         this.userId = userId;
     }
 
-    public String getRegDate() {
-        return regDate;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setRegDate(String regDate) {
-        this.regDate = regDate;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAbout() {
+        return about;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAbout(String about) {
+        this.about = about;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCourseId() {
@@ -173,14 +181,5 @@ public class Course {
     public void setThumbnailurl(String thumbnailurl) {
         this.thumbnailurl = thumbnailurl;
     }
-
-    public String getInstId() {
-        return instId;
-    }
-
-    public void setInstId(String instId) {
-        this.instId = instId;
-    }
-
 
 }

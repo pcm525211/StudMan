@@ -13,9 +13,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CourseDetail"
+            android:label="@string/title_activity_course_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".InstituteDetail"
             android:label="@string/title_activity_institute_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +33,11 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".SignUp" />
         <activity android:name=".login" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
