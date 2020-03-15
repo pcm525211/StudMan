@@ -51,9 +51,10 @@ public class InstituteDetail extends AppCompatActivity {
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        toolbar.setTitle("Title Here");
+
         LoadLoading.setVisibility(ProgressBar.VISIBLE);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -73,9 +74,7 @@ public class InstituteDetail extends AppCompatActivity {
                 institute=  gson.fromJson(response.toString(),Institute.class);
 
                 InsAbout.setText(institute.getAbout());
-
-                getSupportActionBar().setTitle(institute.getInstName());
-//                Toast.makeText(InstituteDetail.this, ""+institute.getInstName(), Toast.LENGTH_SHORT).show();
+                toolbar.setTitle(institute.getInstName());
                 Glide.with(InsImage.getContext()).load("https://www.leancerweb.com/studman/institute/img/"+institute.getPhoto()).into(InsImage);
             }
         }, new Response.ErrorListener() {
