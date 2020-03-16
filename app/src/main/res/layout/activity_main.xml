@@ -8,26 +8,6 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btnID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginBottom="16dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Go to Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
         android:id="@+id/btn_institutes"
         android:layout_width="0dp"
         android:layout_height="100dp"
@@ -52,20 +32,131 @@
         android:id="@+id/btn_courses"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginTop="123dp"
 
 
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
-
         android:background="@drawable/courses"
+
         android:scaleType="centerCrop"
         android:text="Courses"
-
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/white"
         app:layout_constraintCircleRadius="@dimen/cardview_default_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_institutes"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/university" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="260dp"
+        android:layout_height="115dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/genius_logo_cropped" />
+
+    <Button
+        android:id="@+id/btn_attendance"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+
+
+        android:layout_marginEnd="19dp"
+
+        android:background="@drawable/university"
+        android:scaleType="centerCrop"
+
+        android:text="Attendance"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/white"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_material"
+        app:layout_constraintCircleRadius="@dimen/cardview_default_radius"
+        app:layout_constraintEnd_toStartOf="@+id/btn_material"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/university" />
+
+    <Button
+        android:id="@+id/btn_material"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+
+
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/courses"
+
+        android:scaleType="centerCrop"
+        android:text="Material"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/white"
+        app:layout_constraintCircleRadius="@dimen/cardview_default_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_attendance"
+        app:layout_constraintTop_toBottomOf="@+id/btn_courses"
+        app:srcCompat="@drawable/university" />
+
+    <Button
+        android:id="@+id/btn_exam"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+
+
+        android:layout_marginEnd="19dp"
+
+        android:background="@drawable/university"
+        android:scaleType="centerCrop"
+
+        android:text="Exam"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/white"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_result"
+        app:layout_constraintCircleRadius="@dimen/cardview_default_radius"
+        app:layout_constraintEnd_toStartOf="@+id/btn_result"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/university" />
+
+    <Button
+        android:id="@+id/btn_result"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+
+
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/courses"
+
+        android:scaleType="centerCrop"
+        android:text="Result"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/white"
+        app:layout_constraintCircleRadius="@dimen/cardview_default_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_exam"
+        app:layout_constraintTop_toBottomOf="@+id/btn_material"
+        app:srcCompat="@drawable/university" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/courses"
+
+        android:scaleType="centerCrop"
+        android:text="Account"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:srcCompat="@drawable/university"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_result" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

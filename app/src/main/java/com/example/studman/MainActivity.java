@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn = (Button) findViewById(R.id.btnID);
-        btn2 = (Button) findViewById(R.id.button);
+
         btnInstitutes = (Button) findViewById(R.id.btn_institutes);
         btnCourses = (Button) findViewById(R.id.btn_courses);
 
@@ -47,18 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
-        //go to login
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),login.class);
-                startActivity(i);
-            }
-        });
-
 
 
         }

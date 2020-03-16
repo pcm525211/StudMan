@@ -1,6 +1,7 @@
 package com.example.studman;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -64,7 +65,7 @@ public class InstituteDetail extends AppCompatActivity {
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton mailTo = (FloatingActionButton) findViewById(R.id.insitite_mailto);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
@@ -73,11 +74,12 @@ public class InstituteDetail extends AppCompatActivity {
         courseLoading.setVisibility(ProgressBar.VISIBLE);
 
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        mailTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent mailToIntent = new Intent(Intent.ACTION_SENDTO);
+                mailToIntent.setData(Uri.parse("mailto:"+institute.getEmail()));
+                startActivity(mailToIntent);
             }
         });
 
