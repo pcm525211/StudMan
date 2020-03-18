@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -87,6 +88,13 @@ public class SplashScreen extends AppCompatActivity {
                         try{
 
                             if(response.getString("status").equals("success") ){
+                                SharedPreferences myshare = getSharedPreferences("userid",MODE_PRIVATE);
+
+                                SharedPreferences.Editor editor = myshare.edit();
+
+                                editor.putString("userid",response.getString("userid"));
+
+                                editor.commit();
                                isStored = true;
 
                             }else{

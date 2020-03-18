@@ -1,6 +1,8 @@
 package com.example.studman;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,9 +11,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,7 +28,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CourseDetail extends AppCompatActivity {
 
@@ -36,6 +44,7 @@ public class CourseDetail extends AppCompatActivity {
     TextView CoursePrice;
     LinearLayout LinPre;
     LinearLayout LinWL;
+    final String EnrollUrl = "https://www.leancerweb.com/studman/course/enroll-request.php";
 
 
     @Override
@@ -54,6 +63,7 @@ public class CourseDetail extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         String UserId = bundle.getString("UserId");
         final String URL = "https://www.leancerweb.com/studman/course/index.php?course_id="+UserId;
+
 //        final String URL_COURSES = "https://www.leancerweb.com/studman/course/index.php?ins_id="+UserId;
 
 
@@ -68,8 +78,13 @@ public class CourseDetail extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                LoadLoading.setVisibility(ProgressBar.VISIBLE);
+                SharedPreferences myshare = getSharedPreferences("userid",MODE_PRIVATE);
+
+                Map<String, String> postParam= new HashMap<String, String>();
+                postParam.put("course_id",course.getCourseId());
+                postParam.put("user_id", myshare.getString("userid",""));
+                PostRequest(postParam);
             }
         });
 
@@ -138,5 +153,71 @@ public class CourseDetail extends AppCompatActivity {
 
         RequestQueue requestQueue1 = Volley.newRequestQueue(this);
         requestQueue1.add(jsonObjectRequest);
+    }
+
+    private void PostRequest(Map<String,String> param) {
+        RequestQueue queue;
+        queue = Volley.newRequestQueue(getApplicationContext());
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                EnrollUrl, new JSONObject(param),
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+
+                            if(response.getString("status").equals("success") ){
+                                LoadLoading.setVisibility(ProgressBar.GONE);
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetail.this);
+
+
+                                builder.setMessage(response.getString("msg"));
+
+                                builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        startActivity(new Intent(CourseDetail.this,MainActivity.class));
+                                    }
+                                });
+
+                                AlertDialog dialog = builder.create();
+
+                                dialog.show();
+
+
+
+
+                            }else{
+
+                                Toast.makeText(CourseDetail.this, response.getString("msg"), Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }catch (JSONException je){}
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "here "+error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+        queue.add(jsonObjReq);
+
+
     }
 }
