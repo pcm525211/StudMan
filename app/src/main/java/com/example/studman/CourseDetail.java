@@ -185,10 +185,7 @@ public class CourseDetail extends AppCompatActivity {
                                 AlertDialog dialog = builder.create();
 
                                 dialog.show();
-
-
-
-
+                                
                             }else{
 
                                 Toast.makeText(CourseDetail.this, response.getString("msg"), Toast.LENGTH_SHORT).show();

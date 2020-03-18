@@ -12,10 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Materials"></activity>
         <activity
             android:name=".CourseDetail"
             android:label="@string/title_activity_course_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".InstituteDetail"
             android:label="@string/title_activity_institute_detail"
