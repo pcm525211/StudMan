@@ -80,7 +80,6 @@ public class CourseDetail extends AppCompatActivity {
             public void onClick(View view) {
                 LoadLoading.setVisibility(ProgressBar.VISIBLE);
                 SharedPreferences myshare = getSharedPreferences("userid",MODE_PRIVATE);
-
                 Map<String, String> postParam= new HashMap<String, String>();
                 postParam.put("course_id",course.getCourseId());
                 postParam.put("user_id", myshare.getString("userid",""));
