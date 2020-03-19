@@ -14,20 +14,23 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,14 +40,16 @@ import java.util.Map;
 public class CourseDetail extends AppCompatActivity {
 
     ImageView CourseImage;
-    ProgressBar LoadLoading;
+    ProgressBar LoadLoading,SubjectsLoading;
     Course course;
     Toolbar toolbar;
     TextView CourseDescription;
     TextView CoursePrice;
     LinearLayout LinPre;
     LinearLayout LinWL;
+    Subject subjects[];
     final String EnrollUrl = "https://www.leancerweb.com/studman/course/enroll-request.php";
+
 
 
     @Override
@@ -56,6 +61,11 @@ public class CourseDetail extends AppCompatActivity {
         LinPre = (LinearLayout) findViewById(R.id.lin_prerequirement);
         LinWL = (LinearLayout) findViewById(R.id.lin_whatlearn);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        final RecyclerView subjectList = findViewById(R.id.subjectRview);
+        subjectList.setLayoutManager(new LinearLayoutManager(this));
+
+
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
@@ -63,8 +73,7 @@ public class CourseDetail extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         String UserId = bundle.getString("UserId");
         final String URL = "https://www.leancerweb.com/studman/course/index.php?course_id="+UserId;
-
-//        final String URL_COURSES = "https://www.leancerweb.com/studman/course/index.php?ins_id="+UserId;
+        final String URL_SUBJECTS = "https://www.leancerweb.com/studman/course/subject.php?course_id="+UserId;
 
 
         CourseImage = (ImageView)findViewById(R.id.CourseImage);
@@ -72,7 +81,8 @@ public class CourseDetail extends AppCompatActivity {
 //        InsAbout = (TextView)findViewById(R.id.txt_about);
         LoadLoading = (ProgressBar)findViewById(R.id.LoadLoading);
         LoadLoading.setVisibility(ProgressBar.VISIBLE);
-
+        SubjectsLoading = (ProgressBar)findViewById(R.id.subjectsLoading);
+        SubjectsLoading.setVisibility(ProgressBar.GONE);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +97,31 @@ public class CourseDetail extends AppCompatActivity {
             }
         });
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+//        For subjects
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,URL_SUBJECTS , null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                SubjectsLoading.setVisibility(View.GONE);
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                subjects=  gson.fromJson(response.toString(),Subject[].class);
+                SubjectAdapter SA = new SubjectAdapter(subjects,CourseDetail.this);
+                subjectList.setAdapter(SA);
+                SA.notifyDataSetChanged();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(CourseDetail.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+//        for Course Details
+        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 LoadLoading.setVisibility(View.GONE);
@@ -139,8 +173,9 @@ public class CourseDetail extends AppCompatActivity {
 
                 }
 
-
-
+                SubjectsLoading.setVisibility(ProgressBar.VISIBLE);
+                RequestQueue requestQueue2 = Volley.newRequestQueue(getApplicationContext());
+                requestQueue2.add(jsonArrayRequest);
 
             }
         }, new Response.ErrorListener() {

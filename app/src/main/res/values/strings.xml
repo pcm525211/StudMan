@@ -22,5 +22,6 @@
     <string name="title_prerequirement">Prerequisites</string>
     <string name="title_whatlearn">What you will learn?</string>
     <string name="title_courses">Courses</string>
+    <string name="title_subjects">Subjects</string>
     <string name="title_activity_course_detail">Course Detail</string>
 </resources>

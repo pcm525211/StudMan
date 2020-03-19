@@ -180,49 +180,49 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:elevation="10dip"-->
-<!--            android:layout_marginTop="10dip"-->
-<!--            app:cardCornerRadius="10dip"-->
-<!--            >-->
-<!--            <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                >-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="@dimen/text_margin"-->
-<!--                    android:text="@string/title_courses"-->
-<!--                    android:textSize="30dip"-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dip"
+            android:layout_marginTop="10dip"
+            app:cardCornerRadius="10dip"
+            >
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="@string/title_subjects"
+                    android:textSize="30dip"
 
-<!--                    />-->
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="1dp"-->
-<!--                    android:background="@android:color/darker_gray"-->
-<!--                    android:layout_marginLeft="15dip"-->
-<!--                    android:layout_marginRight="15dip"-->
-<!--                    android:elevation="2dip"-->
-<!--                    />-->
-<!--                <ProgressBar-->
-<!--                    android:id="@+id/courseLoading"-->
-<!--                    style="?android:attr/progressBarStyle"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    />-->
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/courseRview"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+                    android:elevation="2dip"
+                    />
+                <ProgressBar
+                    android:id="@+id/subjectsLoading"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/subjectRview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
-<!--                    />-->
-<!--            </androidx.appcompat.widget.LinearLayoutCompat>-->
-<!--        </androidx.cardview.widget.CardView>-->
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
 
 
 
