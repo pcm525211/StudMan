@@ -172,6 +172,7 @@ public class CourseDetail extends AppCompatActivity {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetail.this);
 
                                 builder.setIcon(R.drawable.icon_ok);
+                                builder.setTitle("Message");
                                 builder.setMessage(response.getString("msg"));
 
                                 builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
