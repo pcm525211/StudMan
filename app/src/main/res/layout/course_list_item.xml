@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
     app:layout_constraintCircleRadius="200dp"
@@ -12,12 +12,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding = "10dip"
-        android:layout_margin="10dip"
+        android:padding = "20dip"
+        android:layout_margin="5dip"
         android:radius="200dip"
         app:cardCornerRadius="20dip"
-        app:cardElevation="5dip"
         >
+
         <ImageView
             android:id="@+id/imgIcon"
             android:layout_width="match_parent"
@@ -25,22 +25,22 @@
             android:scaleType="centerCrop"
 
 
-            android:foreground="@color/overlay"
             />
 
-        <TextView
-            android:id="@+id/textTitle"
-            android:layout_width="211dip"
-            android:layout_height="54dip"
-            android:layout_gravity="center"
-            android:gravity="center"
 
-            android:textFontWeight="20"
-            android:textColor="@color/white"
-
-            />
 
     </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="left"
 
+        android:textFontWeight="20"
+        android:layout_marginBottom="7dip"
+        android:padding="3dp"
+
+        />
 
 </LinearLayout>

@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     //declarations
 
-    CardView btnIns, btnCourses, btnMaterials;
+    CardView btnIns, btnCourses, btnMaterials,btnExams;
     RequestQueue queue;
 
 
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         btnIns = (CardView)  findViewById(R.id.btn_ins);
         btnCourses = (CardView) findViewById(R.id.btn_courses);
         btnMaterials = (CardView) findViewById(R.id.btn_material);
+        btnExams = (CardView) findViewById(R.id.btn_exam);
 
         //go to institutes
 
@@ -64,6 +65,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Go to exams
+        btnExams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Exams.class));
+            }
+        });
 
-        }
+
+    }
+
+
+
     }

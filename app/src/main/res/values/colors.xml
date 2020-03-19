@@ -10,4 +10,5 @@
     <color name="orange">#EBEBEB</color>
     <color name="trans">#00FFFFFF</color>
     <color name="colorYellowTrans">#C5A4212D</color>
+    <color name="colorRed">#A4212D</color>
 </resources>

@@ -24,4 +24,7 @@
     <string name="title_courses">Courses</string>
     <string name="title_subjects">Subjects</string>
     <string name="title_activity_course_detail">Course Detail</string>
+    <string name="title_activity_exams">Exams</string>
+    <string name="tab_text_1">Completed</string>
+    <string name="tab_text_2">Upcoming</string>
 </resources>
