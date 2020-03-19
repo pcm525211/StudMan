@@ -3,9 +3,8 @@
     package="com.example.studman">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,10 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".Exams"
-            android:label="@string/title_activity_exams"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Exams"></activity>
         <activity android:name=".Materials" />
         <activity
             android:name=".CourseDetail"
