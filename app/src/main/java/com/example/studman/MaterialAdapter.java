@@ -1,7 +1,11 @@
 package com.example.studman;
 
+import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +17,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
+
 
 public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.MAViewHolder>{
 
     private Material[] materials;
     private Context context;
+    private long downloadID;
 
     public MaterialAdapter(Material[] materials,Context context){
         this.materials = materials;
@@ -42,7 +49,19 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.MAView
         holder.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,material.getUrl(),Toast.LENGTH_LONG).show();
+
+
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse("https://www.leancerweb.com/studman/materials/content/"+material.getUrl()))
+                        .setTitle(material.getMaterialName())
+                        .setDescription("Downloading File...")
+                        .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+                        .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,material.getUrl())
+                        .setAllowedOverMetered(true)
+                        .setAllowedOverRoaming(true);
+
+                    DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+                    downloadID = dm.enqueue(request);
+
             }
         });
     }
