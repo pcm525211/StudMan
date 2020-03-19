@@ -171,7 +171,7 @@ public class CourseDetail extends AppCompatActivity {
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetail.this);
 
-
+                                builder.setIcon(R.drawable.icon_ok);
                                 builder.setMessage(response.getString("msg"));
 
                                 builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
@@ -187,7 +187,22 @@ public class CourseDetail extends AppCompatActivity {
                                 
                             }else{
 
-                                Toast.makeText(CourseDetail.this, response.getString("msg"), Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetail.this);
+
+                                builder.setIcon(R.drawable.icon_cancel);
+                                builder.setTitle("Message");
+                                builder.setMessage(response.getString("msg"));
+
+                                builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        startActivity(new Intent(CourseDetail.this,MainActivity.class));
+                                    }
+                                });
+
+                                AlertDialog dialog = builder.create();
+
+                                dialog.show();
                             }
 
 

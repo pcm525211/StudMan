@@ -13,8 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     //declarations
 
-    CardView btnIns;
-    CardView btnCourses;
+    CardView btnIns, btnCourses, btnMaterials;
     RequestQueue queue;
 
 
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnIns = (CardView)  findViewById(R.id.btn_ins);
         btnCourses = (CardView) findViewById(R.id.btn_courses);
+        btnMaterials = (CardView) findViewById(R.id.btn_material);
 
         //go to institutes
 
@@ -47,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(),Courses.class);
                 startActivity(i);
+            }
+        });
+
+        btnMaterials.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Materials.class));
             }
         });
 
