@@ -1,7 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
+<!--  Old theme Style
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    Replaced with material theme
+    -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorRed</item>
         <item name="colorPrimaryDark">@color/colorRed</item>

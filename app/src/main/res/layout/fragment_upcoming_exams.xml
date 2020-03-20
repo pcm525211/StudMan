@@ -4,14 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UpcomingExams"
-    android:padding="20dip"
+
     >
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/upcoming"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/upcomingExamRview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello from upcoming exams" />
+
+        android:background="@color/background"
+        android:padding="10dip"
+        />
+    <ProgressBar
+        android:id="@+id/examLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
 
 </FrameLayout>

@@ -1,12 +1,30 @@
 package com.example.studman;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -23,6 +41,14 @@ public class UpcomingExams extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+//    Declarations
+//    SharedPreferences userid = this.getActivity().getSharedPreferences("userid", Context.MODE_PRIVATE);
+//    private final String URL = "https://www.leancerweb.com/studman/exam/upcoming.php?user_id="+ userid.getString("userid","");
+    private final String URL = "https://www.leancerweb.com/studman/exam/upcoming.php?user_id=10";
+    private ProgressBar examLoading;
+    private UpcomingExam[] upcomingExams;
+
 
     public UpcomingExams() {
         // Required empty public constructor
@@ -54,6 +80,10 @@ public class UpcomingExams extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
+
+
+
     }
 
     @Override
@@ -61,5 +91,87 @@ public class UpcomingExams extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_upcoming_exams, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        examLoading = (ProgressBar) getActivity().findViewById(R.id.examLoading);
+        final RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.upcomingExamRview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                URL, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+
+                            if(response.getString("status").equals("success") ){
+                                examLoading.setVisibility(View.GONE);
+
+                                GsonBuilder gsonBuilder = new GsonBuilder();
+                                Gson gson = gsonBuilder.create();
+                                upcomingExams=  gson.fromJson(response.getJSONArray("upcoming").toString(),UpcomingExam[].class);
+//                                Toast.makeText(getContext(), ""+response.getJSONArray("upcoming").toString(), Toast.LENGTH_SHORT).show();
+                                UpcomingExamAdapter UCA = new UpcomingExamAdapter(upcomingExams,getContext());
+                                recyclerView.setAdapter(UCA);
+                                UCA.notifyDataSetChanged();
+
+                            }else{
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                                builder.setIcon(R.drawable.icon_cancel);
+                                builder.setTitle("Message");
+                                builder.setMessage(response.getString("msg"));
+
+                                builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        startActivity(new Intent(getContext(),MainActivity.class));
+                                    }
+                                });
+
+                                AlertDialog dialog = builder.create();
+
+                                dialog.show();
+                            }
+
+
+                        }catch (JSONException je){}
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "here "+error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,URL , null, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+////                Toast.makeText(Institutes.this, response.toString(), Toast.LENGTH_LONG).show();
+//                examLoading.setVisibility(View.GONE);
+////                isloading = false;
+//                GsonBuilder gsonBuilder = new GsonBuilder();
+//                Gson gson = gsonBuilder.create();
+//                upcomingExams=  gson.fromJson(response.getJSONArray("upcoming").toString(),UpcomingExam[].class);
+//                UpcomingExamAdapter UCA = new UpcomingExamAdapter(upcomingExams,getActivity());
+//                recyclerView.setAdapter(UCA);
+//                UCA.notifyDataSetChanged();
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getContext(), "Here-"+error.toString(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(jsonObjReq);
     }
 }
