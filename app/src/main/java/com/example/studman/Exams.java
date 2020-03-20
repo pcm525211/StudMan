@@ -2,6 +2,7 @@ package com.example.studman;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,7 +58,7 @@ public class Exams extends AppCompatActivity {
         public List<String> fragmentTitleList = new ArrayList<>();
 
         public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
-            super(fm, behavior);
+            super(fm);
         }
 
         public void addFragment(Fragment fragment, String title)

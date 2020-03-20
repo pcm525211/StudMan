@@ -74,6 +74,7 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.MAView
     public class MAViewHolder extends RecyclerView.ViewHolder{
         TextView txttitle,txttype;
         Button btnDownload;
+
         public MAViewHolder(View itemView){
             super(itemView);
             txttitle = (TextView) itemView.findViewById(R.id.textMaterialTitle);
