@@ -2,6 +2,7 @@ package com.example.studman;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,7 @@ public class UpcomingExams extends Fragment {
 //    Declarations
 //    SharedPreferences userid = this.getActivity().getSharedPreferences("userid", Context.MODE_PRIVATE);
 //    private final String URL = "https://www.leancerweb.com/studman/exam/upcoming.php?user_id="+ userid.getString("userid","");
-    private final String URL = "https://www.leancerweb.com/studman/exam/upcoming.php?user_id=10";
+    private String URL = "https://www.leancerweb.com/studman/exam/upcoming.php?user_id=";
     private ProgressBar examLoading;
     private UpcomingExam[] upcomingExams;
 
@@ -101,8 +102,9 @@ public class UpcomingExams extends Fragment {
         final RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.upcomingExamRview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        SharedPreferences myshare = getActivity().getSharedPreferences("userid",getContext().MODE_PRIVATE);
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                URL, null,
+                URL+myshare.getString("userid",""), null,
                 new Response.Listener<JSONObject>() {
 
                     @Override
