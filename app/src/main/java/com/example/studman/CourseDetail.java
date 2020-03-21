@@ -213,7 +213,9 @@ public class CourseDetail extends AppCompatActivity {
                                 builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         startActivity(new Intent(CourseDetail.this,MainActivity.class));
+                                        finish();
                                     }
                                 });
 

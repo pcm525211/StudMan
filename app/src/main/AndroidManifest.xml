@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Exams"></activity>
+        <activity android:name=".Fee"></activity>
+        <activity android:name=".Exams" />
         <activity android:name=".Materials" />
         <activity
             android:name=".CourseDetail"

@@ -132,7 +132,9 @@ public class UpcomingExams extends Fragment {
                                 builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+
                                         startActivity(new Intent(getContext(),MainActivity.class));
+                                        getActivity().finish();
                                     }
                                 });
 
