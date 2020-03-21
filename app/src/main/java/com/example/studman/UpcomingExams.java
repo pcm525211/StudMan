@@ -155,25 +155,7 @@ public class UpcomingExams extends Fragment {
             }
         });
 
-//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,URL , null, new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-////                Toast.makeText(Institutes.this, response.toString(), Toast.LENGTH_LONG).show();
-//                examLoading.setVisibility(View.GONE);
-////                isloading = false;
-//                GsonBuilder gsonBuilder = new GsonBuilder();
-//                Gson gson = gsonBuilder.create();
-//                upcomingExams=  gson.fromJson(response.getJSONArray("upcoming").toString(),UpcomingExam[].class);
-//                UpcomingExamAdapter UCA = new UpcomingExamAdapter(upcomingExams,getActivity());
-//                recyclerView.setAdapter(UCA);
-//                UCA.notifyDataSetChanged();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getContext(), "Here-"+error.toString(), Toast.LENGTH_LONG).show();
-//            }
-//        });
+//
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(jsonObjReq);
