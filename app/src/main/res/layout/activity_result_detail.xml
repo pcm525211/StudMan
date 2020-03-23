@@ -39,7 +39,7 @@
                         android:id="@+id/txtExamTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Internals 1"
+
                         android:textSize="24sp"
 
                         />
@@ -47,7 +47,6 @@
                         android:id="@+id/txtCourseTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="PHP course"
                         android:textSize="14sp"
 
 
@@ -72,7 +71,6 @@
                             android:id="@+id/txtDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Title here"
                             android:textSize="14sp"
                             android:layout_weight="1"
                             android:layout_marginLeft="10dip"
@@ -92,7 +90,6 @@
                         android:id="@+id/txtPercentage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="60.5%"
                         android:textSize="45dip"
                         android:layout_weight="0"
                         android:layout_gravity="right"
@@ -101,7 +98,6 @@
                         android:id="@+id/txtClass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="First Class"
                         android:textSize="14sp"
                         android:gravity="right"
                         />
@@ -109,7 +105,6 @@
                         android:id="@+id/txtTotalMarks"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="65/90"
                         android:textSize="24sp"
                         android:gravity="right"
                         />
