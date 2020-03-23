@@ -1,6 +1,7 @@
 package com.example.studman;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +41,9 @@ public class CompleteExamAdapter extends RecyclerView.Adapter<CompleteExamAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent it = new Intent(context,CourseDetail.class);
-//                it.putExtra("UserId",course.getCourseId());
-//                context.startActivity(it);
+                Intent it = new Intent(context,ResultDetail.class);
+                it.putExtra("UserId",CompleteExam.getExId());
+                context.startActivity(it);
 //                Toast.makeText(context, subject.getSubName() + " clicked", Toast.LENGTH_SHORT).show();
             }
         });
