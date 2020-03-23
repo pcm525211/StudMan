@@ -14,9 +14,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.payumoney.core.PayUmoneyConfig;
 import com.payumoney.core.PayUmoneyConstants;
 import com.payumoney.core.PayUmoneySdkInitializer;
@@ -26,6 +36,7 @@ import com.payumoney.sdkui.ui.utils.ResultModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +57,10 @@ public class Fee extends AppCompatActivity {
     private PayUmoneySdkInitializer.PaymentParam mPaymentParams;
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
+    String URL = "https://www.leancerweb.com/studman/fee/index.php?";
+    private ProgressDialog progressDialog;
+    String courseid,userid,feeamount;
+    TextView feea;
 
     MaterialButton btnPay;
 
@@ -53,25 +68,94 @@ public class Fee extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fee);
-
+        progressDialog = new ProgressDialog(Fee.this);
+        progressDialog.setMessage("Please wait...");
         btnPay = (MaterialButton) findViewById(R.id.btn_pay);
+        feea = (TextView) findViewById(R.id.feeamount);
 
 
         settings = getSharedPreferences("settings", MODE_PRIVATE);
         editor = settings.edit();
         editor.putBoolean("is_prod_env", false);
         editor.apply();
+        final SharedPreferences myshare = getSharedPreferences("userid",MODE_PRIVATE);
+        userid = myshare.getString("userid","");
 
-
+        checkFee(userid);
+        progressDialog.show();
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchPayUMoney();
+
+
+                launchPayUMoney(feeamount);
             }
         });
 
     }
-        private void launchPayUMoney(){
+
+    private void checkFee(String userId){
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                URL+"user_id="+userId, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+
+                            if(response.getString("status").equals("success") ){
+
+                                if(response.getString("paid").equals("no")){
+                                    courseid = response.getString("course_id");
+                                    feeamount = response.getString("feeamount");
+                                    feea.setText(feeamount);
+                                    progressDialog.dismiss();
+                                }else{
+                                    showMsg(response.getString("msg"));
+                                }
+
+                            }else{
+                                showMsg(response.getString("msg"));
+                            }
+
+
+                        }catch (JSONException je){}
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Fee.this, "here "+error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjReq);
+    }
+
+    private void showMsg(String msg){
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+
+
+        builder.setTitle("Message");
+        builder.setMessage(msg);
+
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                startActivity(new Intent(Fee.this,MainActivity.class));
+                finish();
+            }
+        });
+
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+
+        dialog.show();
+    }
+
+        private void launchPayUMoney(String feeamount){
             PayUmoneyConfig payUmoneyConfig = PayUmoneyConfig.getInstance();
 
             payUmoneyConfig.setDoneButtonText("Done");
@@ -95,7 +179,7 @@ public class Fee extends AppCompatActivity {
             String udf9 = "";
             String udf10 = "";
 
-            builder.setAmount("1000")
+            builder.setAmount(feeamount)
                     .setTxnId(txnId)
                     .setPhone(phone)
                     .setProductName(productName)
@@ -130,51 +214,6 @@ public class Fee extends AppCompatActivity {
             }catch(Exception e){}
         }
 
-        private PayUmoneySdkInitializer.PaymentParam calculateServerSideHashAndInitiatePayment1(final PayUmoneySdkInitializer.PaymentParam paymentParam) {
-
-            StringBuilder stringBuilder = new StringBuilder();
-            HashMap<String, String> params = paymentParam.getParams();
-            stringBuilder.append(params.get(PayUmoneyConstants.KEY) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.TXNID) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.AMOUNT) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.PRODUCT_INFO) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.FIRSTNAME) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.EMAIL) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.UDF1) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.UDF2) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.UDF3) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.UDF4) + "|");
-            stringBuilder.append(params.get(PayUmoneyConstants.UDF5) + "||||||");
-
-
-            stringBuilder.append("");
-
-            String hash = hashCal(stringBuilder.toString());
-            paymentParam.setMerchantHash(hash);
-
-            return paymentParam;
-        }
-
-        public static String hashCal(String str) {
-            byte[] hashseq = str.getBytes();
-            StringBuilder hexString = new StringBuilder();
-            try {
-                MessageDigest algorithm = MessageDigest.getInstance("SHA-512");
-                algorithm.reset();
-                algorithm.update(hashseq);
-                byte messageDigest[] = algorithm.digest();
-                for (byte aMessageDigest : messageDigest) {
-                    String hex = Integer.toHexString(0xFF & aMessageDigest);
-                    if (hex.length() == 1) {
-                        hexString.append("0");
-                    }
-                    hexString.append(hex);
-                }
-            } catch (NoSuchAlgorithmException ignored) {
-            }
-            return hexString.toString();
-        }
-
         @Override
         protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
@@ -191,27 +230,19 @@ public class Fee extends AppCompatActivity {
                 // Check which object is non-null
                 if (transactionResponse != null && transactionResponse.getPayuResponse() != null) {
                     if (transactionResponse.getTransactionStatus().equals(TransactionResponse.TransactionStatus.SUCCESSFUL)) {
-                        //Success Transaction
-                        Toast.makeText(Fee.this, "Success", Toast.LENGTH_SHORT).show();
+
+                        progressDialog.dismiss();
+
+                        progressDialog.show();
+
+                        saveToserver();
+
                     } else {
                         //Failure Transaction
                         Toast.makeText(Fee.this, "Fail", Toast.LENGTH_SHORT).show();
+                        showMsg("Sorry Payment Fail");
                     }
 
-                    // Response from Payumoney
-                    String payuResponse = transactionResponse.getPayuResponse();
-
-                    // Response from SURl and FURL
-                    String merchantResponse = transactionResponse.getTransactionDetails();
-
-                    new AlertDialog.Builder(this)
-                            .setCancelable(false)
-                            .setMessage("Payu's Data : " + payuResponse + "\n\n\n Merchant's Data: " + merchantResponse)
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    dialog.dismiss();
-                                }
-                            }).show();
 
                 } else if (resultModel != null && resultModel.getError() != null) {
                     Log.d("PAYU", "Error response : " + resultModel.getError().getTransactionResponse());
@@ -256,13 +287,13 @@ public class Fee extends AppCompatActivity {
          * This AsyncTask generates hash from server.
          */
         private class GetHashesFromServerTask extends AsyncTask<String, String, String> {
-            private ProgressDialog progressDialog;
+
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progressDialog = new ProgressDialog(Fee.this);
-                progressDialog.setMessage("Please wait...");
+
+
                 progressDialog.show();
             }
 
@@ -340,5 +371,35 @@ public class Fee extends AppCompatActivity {
                     PayUmoneyFlowManager.startPayUMoneyFlow(mPaymentParams,Fee.this,R.style.AppTheme_default,true);
                 }
             }
+        }
+
+        private  void saveToserver(){
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                    URL+"user_id="+userid+"&course_id="+courseid+"&feeamount="+feeamount, null,
+                    new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try{
+                                progressDialog.dismiss();
+                                if(response.getString("status").equals("success") ){
+                                    showMsg(response.getString("msg"));
+
+                                }else{
+                                    showMsg(response.getString("msg"));
+                                }
+                            }catch (JSONException je){}
+
+                        }
+                    }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(Fee.this, "here "+error.toString(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(jsonObjReq);
         }
 }
