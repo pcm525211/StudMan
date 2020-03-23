@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.studman">
+    package="com.example.studman" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -13,8 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_main_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="false">
-        <activity android:name=".Fee"></activity>
+        android:usesCleartextTraffic="false" >
+        <activity android:name=".ExamSchedules" >
+        </activity>
+        <activity android:name=".Fee" />
         <activity android:name=".Exams" />
         <activity android:name=".Materials" />
         <activity
@@ -25,7 +27,7 @@
             android:name=".InstituteDetail"
             android:label="@string/title_activity_institute_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
