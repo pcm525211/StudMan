@@ -36,15 +36,15 @@
             android:layout_weight="2"
             android:gravity="right"
             >
+
             <TextView
                 android:id="@+id/txtSubjectPercentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="60%"
-                android:textSize="35sp"
-                android:layout_weight="0"
                 android:layout_gravity="right"
-                />
+                android:layout_weight="0"
+                android:text="60%"
+                android:textSize="@dimen/dimen_30sp" />
             <TextView
                 android:id="@+id/txtSubjectClass"
                 android:layout_width="match_parent"

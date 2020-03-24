@@ -382,6 +382,7 @@ public class Fee extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try{
                                 progressDialog.dismiss();
+                                Toast.makeText(Fee.this,"yeah",Toast.LENGTH_LONG).show();
                                 if(response.getString("status").equals("success") ){
                                     showMsg(response.getString("msg"));
 
