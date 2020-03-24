@@ -39,4 +39,5 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.2.0-alpha05'
     implementation 'com.payumoney.sdkui:plug-n-play:1.6.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
