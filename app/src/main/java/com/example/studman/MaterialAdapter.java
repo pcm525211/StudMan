@@ -1,23 +1,18 @@
 package com.example.studman;
 
 import android.app.DownloadManager;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.io.File;
 
 
 public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.MAViewHolder>{
@@ -45,6 +40,18 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.MAView
 
         holder.txttitle.setText(material.getMaterialName());
         holder.txttype.setText(material.getMaterialType());
+        if(  (material.getMaterialType()).trim()=="PPTX")
+        {
+            holder.imgTypeIcon.setImageResource(R.drawable.icon_ppt);
+        }
+        else if(material.getMaterialType()=="PDF Document")
+        {
+            holder.imgTypeIcon.setImageResource(R.drawable.icon_pdf);
+        }
+        else
+        {
+            holder.imgTypeIcon.setImageResource(R.drawable.icon_doc);
+        }
 
         holder.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,13 +80,15 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.MAView
 
     public class MAViewHolder extends RecyclerView.ViewHolder{
         TextView txttitle,txttype;
-        Button btnDownload;
+        ImageButton btnDownload;
+        ImageView imgTypeIcon;
 
         public MAViewHolder(View itemView){
             super(itemView);
             txttitle = (TextView) itemView.findViewById(R.id.textMaterialTitle);
             txttype = (TextView) itemView.findViewById(R.id.textMaterialType);
-            btnDownload = (Button) itemView.findViewById(R.id.btn_Materialdownload);
+            btnDownload = (ImageButton) itemView.findViewById(R.id.btn_Materialdownload);
+            imgTypeIcon = (ImageView) itemView.findViewById(R.id.img_type_icon);
         }
     }
 }
