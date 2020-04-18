@@ -3,8 +3,12 @@ package com.example.studman;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +30,7 @@ public class Profile extends AppCompatActivity {
     private ProgressDialog progressDialog;
     CircleImageView usericon,courseicon;
     TextView username,coursename,enrolldate,email;
+    SQLiteDatabase db;
     String userid;
     String URL = "https://www.leancerweb.com/studman/profile/index.php?";
     @Override
@@ -89,5 +94,21 @@ public class Profile extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjReq);
+    }
+
+    public void onProfileEdit(View view){
+
+    }
+
+    public void onLogoutButton(View v){
+        db=openOrCreateDatabase("studman", Context.MODE_PRIVATE, null);
+        db.execSQL("DROP TABLE student;");
+        Intent i = new Intent(this, login.class);        // Specify any activity here e.g. home or splash or login etc
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.putExtra("EXIT", true);
+        startActivity(i);
+        this.finish();
     }
 }
